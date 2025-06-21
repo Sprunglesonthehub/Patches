@@ -1,0 +1,27 @@
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -115,3 +115,22 @@
+ pref("network.captive-portal-service.enabled", false);
+ // Disable network connectivity checks (older pref, good to have)
+ pref("network.connectivity-service.enabled", false);
++
++// --- Google Safe Browsing Disable ---
++// Blank out Google Safe Browsing update and gethash URLs
++// This effectively disables Google as the provider for Safe Browsing lists.
++pref("browser.safebrowsing.provider.google.updateURL", "");
++pref("browser.safebrowsing.provider.google.gethashURL", "");
++pref("browser.safebrowsing.provider.google4.updateURL", ""); // For v4 protocol
++pref("browser.safebrowsing.provider.google4.gethashURL", "");
++
++// Optionally, disable specific Safe Browsing features if not using any provider
++pref("browser.safebrowsing.phishing.enabled", false);
++pref("browser.safebrowsing.malware.enabled", false);
++pref("browser.safebrowsing.downloads.enabled", false); // For downloaded files
++pref("browser.safebrowsing.downloads.remote.enabled", false); // For download reputation checks
++
++// --- Geolocation ---
++// Change the default network-based geolocation service from Google to Mozilla's.
++// Alternatively, set to "" to disable network geolocation if OS geolocation is preferred/sufficient.
++pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
++// pref("geo.provider.ms-windows-location", true); // On Windows, prefer OS location if available
++// pref("geo.provider.use_corelocation", true); // On macOS, prefer OS location if available

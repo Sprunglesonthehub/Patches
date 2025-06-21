@@ -1,0 +1,18 @@
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -103,3 +103,15 @@
+ 
+ // Enable userChrome.css and userContent.css customizations
+ pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
++
++// Disable search suggestions from the default search engine in the URL bar
++pref("browser.urlbar.suggest.searches", false);
++
++// Disable "Search with Google" context menu item if Google is not the default
++// (This is more of a cleanup, actual default engine change is more complex)
++// pref("browser.search.context.loadInBackground", false); // Example, actual pref might vary
++
++// Disable captive portal detection (prevents pings to network-test.mozilla.org or similar)
++pref("network.captive-portal-service.enabled", false);
++// Disable network connectivity checks (older pref, good to have)
++pref("network.connectivity-service.enabled", false);

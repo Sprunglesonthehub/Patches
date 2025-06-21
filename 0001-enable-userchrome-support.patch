@@ -1,0 +1,9 @@
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -100,3 +100,6 @@
+ pref("browser.urlbar.suggest.quickactions", true);
+ pref("browser.urlbar.quickactions.featureGate", true);
+ pref("browser.urlbar.quickactions.showCopyLink", true);
++
++// Enable userChrome.css and userContent.css customizations
++pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);

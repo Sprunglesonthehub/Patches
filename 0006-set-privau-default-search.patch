@@ -1,0 +1,18 @@
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -XXX,X +XXX,X @@ // Adjust line numbers based on your firefox.js
+ // ... context from firefox.js ...
+ pref("browser.newtab.url", "https://arttulos.org/search.html");
+ 
++// Set default search engine name
++pref("browser.search.defaultenginename", "Priv.au");
++// pref("browser.search.defaultenginename.private", "Priv.au"); // Optional for private mode
++
+ // Make an effort to remove older about:home startup override data.
+--- a/browser/app/profile/search.json.mozlz4
++++ b/browser/app/profile/search.json.mozlz4
+GIT binary patch
+delta ...
+...(lots of encoded binary data for the new search.json.mozlz4)...
+literal ...
+...(lots of encoded binary data for the new search.json.mozlz4)...

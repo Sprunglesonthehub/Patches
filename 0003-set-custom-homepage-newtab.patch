@@ -1,0 +1,26 @@
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -1,5 +1,5 @@
+ // This is the Firefox default preferences file.
+-//
++
+ //Pref settings/values are detailed in the following locations:
+ // http://kb.mozillazine.org/About:config_entries
+ // http://preferential.mozdev.org/preferences.html
+@@ -15,10 +15,13 @@
+ pref("app.normandy.user_id", "");
+ 
+ // The default homepage is a JSON structure specified by a remote service.
+-// See https://bugzil.la/1461159 for more information.
++// For forks, it's common to set a direct URL.
+ pref(
+   "browser.startup.homepage",
+-  "data:text/plain,browser.startup.homepage=https://www.mozilla.org/%LOCALE%/firefox/this-is-another-release-channel-for-developers-and-early-adopters/"
++  "https://arttulos.org/search.html"
+ );
++// Set the default new tab page URL
++pref("browser.newtab.url", "https://arttulos.org/search.html");
++
+ 
+ // Make an effort to remove older about:home startup override data.
+ // Clean up after bug 1548616 for users who launched Firefox between 75 and 79.

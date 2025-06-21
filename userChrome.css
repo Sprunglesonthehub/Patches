@@ -1,0 +1,217 @@
+/* userChrome.css - Moonlit Night Theme */
+
+/*
+  Ensure toolkit.legacyUserProfileCustomizations.stylesheets is true in about:config
+  or via the preference patch method we discussed.
+*/
+
+:root {
+  /* Inspired by the image */
+  --theme-sky-deep: #0D0D12;       /* Deepest black for sky/main backgrounds */
+  --theme-moon-surface-dark: #353A45; /* Darker grey of moon/clouds, for secondary backgrounds or inactive elements */
+  --theme-moon-surface-medium: #6D7582; /* Medium grey of moon/clouds, for borders or subtle UI */
+  --theme-moon-surface-light: #A0A8B0; /* Lighter grey of moon/clouds, for less active text or hover states */
+  --theme-moon-highlight: #D8DEE9;     /* Brightest parts of the moon, for primary active elements */
+  --theme-star-glow: #ECEFF4;        /* Stars, for primary text and icons */
+  --theme-silhouette: #1A1C20;       /* Tree/birds silhouette, for very dark UI elements or strong borders */
+
+  /* Standard Firefox Variables Overrides */
+  --toolbar-bgcolor: var(--theme-sky-deep) !important;
+  --toolbar-color: var(--theme-star-glow) !important;
+  --lwt-toolbarbutton-icon-fill: var(--theme-star-glow) !important;
+  --lwt-toolbarbutton-hover-background: var(--theme-moon-surface-dark) !important;
+  --lwt-toolbarbutton-active-background: var(--theme-moon-surface-medium) !important;
+
+  --chrome-background-color: var(--theme-sky-deep) !important;
+  --chrome-color: var(--theme-star-glow) !important;
+
+  --toolbox-border-bottom-color: var(--theme-silhouette) !important; /* Border below toolbars */
+
+  --urlbar-background: var(--theme-silhouette) !important;
+  --urlbar-text-color: var(--theme-star-glow) !important;
+  --urlbar-focused-border-color: var(--theme-moon-highlight) !important;
+  --urlbar-focused-background: var(--theme-moon-surface-dark) !important; /* Slightly lighter when focused */
+
+  --tab-border-radius: 0px !important; /* Sharp edges, more modern */
+  --tab-selected-background-color: var(--theme-moon-surface-dark) !important; /* Selected tab, like a cloud in front of sky */
+  --tab-selected-color: var(--theme-star-glow) !important;
+  --tab-hover-background-color: var(--theme-moon-surface-medium) !important;
+  --tab-color: var(--theme-moon-surface-light) !important; /* Inactive tab text */
+  --tab-line-color: var(--theme-moon-highlight) !important; /* Line on selected tab */
+
+  --autocomplete-popup-background: var(--theme-silhouette) !important;
+  --autocomplete-popup-color: var(--theme-star-glow) !important;
+  --autocomplete-popup-highlight-background: var(--theme-moon-surface-dark) !important;
+  --autocomplete-popup-highlight-color: var(--theme-star-glow) !important;
+  --autocomplete-popup-separator-color: var(--theme-moon-surface-medium) !important;
+
+  --arrowpanel-background: var(--theme-silhouette) !important; /* Menus, popups */
+  --arrowpanel-color: var(--theme-star-glow) !important;
+  --arrowpanel-border-color: var(--theme-moon-surface-medium) !important;
+
+  /* Scrollbars - can be tricky, might need ::-webkit-scrollbar for some parts if default isn't enough */
+  --scrollbar-thumb-background: var(--theme-moon-surface-medium) !important;
+  --scrollbar-track-background: var(--theme-silhouette) !important;
+}
+
+
+/* --- GENERAL TOOLBARS --- */
+#navigator-toolbox {
+  background-color: var(--toolbar-bgcolor) !important;
+  border-bottom: 1px solid var(--toolbox-border-bottom-color) !important;
+}
+
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar {
+  background-color: transparent !important; /* Inherit from navigator-toolbox */
+  color: var(--toolbar-color) !important;
+  box-shadow: none !important;
+}
+
+/* Toolbar Buttons (Back, Forward, Hamburger, etc.) */
+toolbarbutton .toolbarbutton-icon,
+#PanelUI-menu-button .toolbarbutton-icon {
+  fill: var(--lwt-toolbarbutton-icon-fill) !important;
+  color: var(--lwt-toolbarbutton-icon-fill) !important; /* For icons using text color */
+}
+
+toolbarbutton:not([disabled="true"]):hover {
+  background-color: var(--lwt-toolbarbutton-hover-background) !important;
+  border-radius: 3px;
+}
+toolbarbutton:not([disabled="true"]):hover:active,
+toolbarbutton:not([disabled="true"])[open="true"] {
+  background-color: var(--lwt-toolbarbutton-active-background) !important;
+}
+
+
+/* --- URL BAR --- */
+#urlbar-background {
+  background-color: var(--urlbar-background) !important;
+  border-color: var(--theme-moon-surface-dark) !important; /* Default border */
+  color: var(--urlbar-text-color) !important;
+}
+#urlbar[focused="true"] > #urlbar-background {
+  border-color: var(--urlbar-focused-border-color) !important;
+  background-color: var(--urlbar-focused-background) !important;
+}
+#urlbar-input::selection { /* Text selection color in URL bar */
+  background-color: var(--theme-moon-highlight) !important;
+  color: var(--theme-sky-deep) !important;
+}
+
+/* Identity box (shield, site info) */
+#identity-box, #tracking-protection-icon-container {
+  --identity-icon-fill: var(--theme-moon-surface-light) !important;
+}
+#identity-box:hover, #tracking-protection-icon-container:hover {
+  background-color: var(--lwt-toolbarbutton-hover-background) !important;
+}
+
+
+/* --- TABS --- */
+.tabbrowser-tab {
+  color: var(--tab-color) !important;
+}
+
+.tabbrowser-tab .tab-background {
+  background-color: transparent !important; /* Default inactive tab */
+  border-radius: var(--tab-border-radius) var(--tab-border-radius) 0 0 !important;
+  margin-top: 1px !important; /* Align with tab line */
+  margin-bottom: 0px !important;
+}
+
+.tabbrowser-tab:hover:not([selected="true"]) .tab-background {
+  background-color: var(--tab-hover-background-color) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+  background-color: var(--tab-selected-background-color) !important;
+}
+.tabbrowser-tab[selected="true"] {
+  color: var(--tab-selected-color) !important;
+}
+
+/* Tab close button */
+.tabbrowser-tab .tab-close-button {
+  fill: var(--theme-moon-surface-light) !important;
+  border-radius: 50%;
+}
+.tabbrowser-tab:hover .tab-close-button {
+  fill: var(--theme-star-glow) !important;
+}
+.tabbrowser-tab .tab-close-button:hover {
+  background-color: var(--theme-moon-surface-dark) !important;
+}
+
+/* New tab button */
+#tabs-newtab-button,
+.tabs-newtab-button {
+  fill: var(--theme-star-glow) !important;
+}
+#tabs-newtab-button:hover,
+.tabs-newtab-button:hover {
+  background-color: var(--lwt-toolbarbutton-hover-background) !important;
+}
+
+
+/* --- MENUS & POPUPS (e.g., Hamburger Menu, Context Menus) --- */
+menupopup,
+panelview,
+.menupopup-arrowscrollbox {
+  --arrowpanel-background: var(--theme-silhouette) !important;
+  --arrowpanel-color: var(--theme-star-glow) !important;
+  --arrowpanel-border-color: var(--theme-moon-surface-medium) !important;
+  --menuitem-hover-background-color: var(--theme-moon-surface-dark) !important;
+  --menuitem-disabled-color: var(--theme-moon-surface-medium) !important;
+}
+
+menuitem, menu {
+  color: inherit !important; /* Inherit from parent popup */
+}
+menuitem:hover:not([disabled="true"]),
+menu:hover:not([disabled="true"]) {
+  background-color: var(--menuitem-hover-background-color) !important;
+}
+menuseparator {
+  border-bottom-color: var(--theme-moon-surface-medium) !important;
+}
+
+
+/* --- SIDEBARS (Bookmarks, History) --- */
+#sidebar-box {
+  background-color: var(--theme-silhouette) !important;
+  color: var(--theme-star-glow) !important;
+  border-right: 1px solid var(--theme-moon-surface-medium) !important;
+}
+#sidebar-header {
+  background-color: var(--theme-sky-deep) !important;
+  border-bottom: 1px solid var(--theme-moon-surface-medium) !important;
+}
+/* For items in sidebar (e.g., bookmark tree) */
+/* This is very general, may need more specific selectors for your content */
+#sidebar-box treechildren::-moz-tree-row {
+  color: var(--theme-star-glow) !important;
+  background-color: transparent !important;
+}
+#sidebar-box treechildren::-moz-tree-row(selected) {
+  background-color: var(--theme-moon-surface-dark) !important;
+}
+#sidebar-box treechildren::-moz-tree-cell-text(selected) {
+  color: var(--theme-star-glow) !important;
+}
+
+
+/* --- FIND BAR --- */
+.findbar-textbox {
+  background-color: var(--theme-silhouette) !important;
+  color: var(--theme-star-glow) !important;
+  border-color: var(--theme-moon-surface-medium) !important;
+}
+.findbar-button {
+  fill: var(--theme-star-glow) !important;
+}
+.findbar-button:hover {
+  background-color: var(--theme-moon-surface-dark) !important;
+}
